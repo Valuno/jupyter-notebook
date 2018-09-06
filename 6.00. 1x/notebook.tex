@@ -1,0 +1,1423 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Week 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{book-notes}{%
+\section{Book Notes}\label{book-notes}}
+
+    \hypertarget{quad-some-simple-numerical-programs}{%
+\section{\texorpdfstring{3\(\quad\) SOME SIMPLE NUMERICAL
+PROGRAMS}{3\textbackslash{}quad SOME SIMPLE NUMERICAL PROGRAMS}}\label{quad-some-simple-numerical-programs}}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{quad-exhaustive-enumeration}{%
+\subsection{\texorpdfstring{3.1\(\quad\) Exhaustive
+Enumeration}{3.1\textbackslash{}quad Exhaustive Enumeration}}\label{quad-exhaustive-enumeration}}
+
+The code below finds the cube root of a perfect cube, \textbf{using
+exhaustive enumeration to find the cube root}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Find the cube root of a perfect cube}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter an integer: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ans} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{while} \PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZlt{}} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{k}{if} \PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{!=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is not a perfect cube}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{ans} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{ans}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cube root of}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter an integer: 343
+Cube root of 343 is 7
+
+    \end{Verbatim}
+
+    For what values of \(x\) will this program terminate?
+
+The answer is, ``all integers.'' This can be argued quite simply. * The
+value of the expression ans**3 starts at 0, and gets larger each time
+through the loop. * When it reaches or exceeds abs(x), the loop
+terminates. * Since abs(x) is always positive there are only a finite
+number of iterations before the loop must terminate.
+
+Whenever you write a loop, you should think about an appropriate
+\textbf{decrementing function}. This is a function that has the
+following properties: 1. It maps a set of program variables into an
+integer. 2. When the loop is entered, its value is nonnegative. 3. When
+its value is \textless{}=0, the loop terminates. 4. Its value is
+decreased everytime through the loop.
+
+What is the decrementing function for the loop above? It is
+\texttt{abs(x)\ -\ ans**3}.
+
+If you add some errors, this is what happens. If you comment out
+\texttt{ans\ =\ 0}, then the interpreter gives an error because
+\texttt{ans} is not defined. If you replace \texttt{ans\ =\ ans\ +\ 1}
+with \texttt{ans\ =\ ans}, you're stuck in an infinite loop. Ctrl + c
+will get you out of the infinite loop in like, iPython and/or Spyder,
+but I guess not in jupyter notebook.
+
+If you add
+\texttt{print(\textquotesingle{}Value\ of\ the\ decrementing\ function\ abs(x)\ -\ ans**3\ is\textquotesingle{},\textbackslash{}abs(x)\ -\ ans**3)}
+at the start of the loop, then it'll print that over and over again. The
+program would have run forever because the loop body is no longer
+reducing the distance between \texttt{ans**3} and \texttt{abs(x)}.
+
+\textbf{When confronted with a program that seems not to be terminating,
+experienced programmers often insert print statements, such as the one
+here, to test whether the decrementing function is indeed being
+decremented.}
+
+The algorithmic technique used in this program is a variant of
+\textbf{guess and check} called \textbf{exhaustive enumeration}. We
+enumerate all possibilities until we get to the right answer of exhaust
+the space of possibilities.
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#This tip on inserting print statements to debug my code which wasn't terminating was very useful, helped me out in the below finger exercise.}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{max} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter a positive integer: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{max}\PY{p}{:}
+            \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter a positive integer: 10000
+10000
+
+    \end{Verbatim}
+
+    See how large an integer you need to enter before there's a perceptible
+pause before the result is printed.\\
+\emph{There was a perceptible pause at around 10000000.}
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Indentation is important. if the last line, `print(i)` is on the same indentation as the previous line, the program will print 1 2 3 4 5, if `print(i)` is outside, far left, like the book shows, then it only prints 5, given input = 5.}
+\end{Highlighting}
+\end{Shaded}
+
+    \textbf{Finger exercise:} Write a program that asks the user to enter an
+integer and prints two integers, \texttt{root} and \texttt{pwr} such
+that \texttt{0\ \textless{}\ pwr\ \textless{}\ 6} and \texttt{root**pwr}
+is equal to the integer entered by the user. If no such pair of integers
+exists, it should print a message to that effect.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{integer} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter an integer: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{pwr} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{result} \PY{o}{=} \PY{k+kc}{False}
+        \PY{k}{while} \PY{n}{pwr} \PY{o}{\PYZlt{}} \PY{l+m+mi}{6}\PY{p}{:}
+            \PY{n}{root} \PY{o}{=} \PY{n}{integer}
+            \PY{k}{while} \PY{n}{root} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{if} \PY{n}{root}\PY{o}{*}\PY{o}{*}\PY{n}{pwr} \PY{o}{==} \PY{n}{integer}\PY{p}{:}
+                    \PY{n}{result} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{root:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{root}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{pwr}\PY{p}{)}
+                    \PY{n}{root} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{root} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}    
+            \PY{n}{pwr} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+        \PY{k}{if} \PY{n}{pwr} \PY{o}{==} \PY{l+m+mi}{6} \PY{o+ow}{and} \PY{n}{result} \PY{o}{==} \PY{k+kc}{False}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No pair of roots and powers exist.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter an integer: 26
+root: 26 power: 1
+
+    \end{Verbatim}
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#This doesn't account for imaginary roots as I imagine that's more complicated... pretty solid tho imo.}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{qquadfor-loops}{%
+\subsection{\texorpdfstring{3.2\(\qquad\)For
+Loops}{3.2\textbackslash{}qquadFor Loops}}\label{qquadfor-loops}}
+
+The \texttt{while} loops we have used iterate over a sequence of
+integers. Python provides a language mechanism, the \textbf{\texttt{for}
+loop}, that can be used to simplify programs containing this kind of
+iteration.
+
+The general form of a \texttt{for} statement is (the words in asterisks
+are desciptions of what can appear, not actual code):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \ControlFlowTok{for} \OperatorTok{*}\NormalTok{variable}\OperatorTok{*} \KeywordTok{in} \OperatorTok{*}\NormalTok{sequence}\OperatorTok{*}\NormalTok{:}
+        \OperatorTok{*}\NormalTok{code block}\OperatorTok{*}
+\end{Highlighting}
+\end{Shaded}
+
+The variable following \texttt{for} is assigned the first value in the
+sequence, then the second value in the sequence, etc. until the sequence
+is exhausted or a \textbf{break} statement is executed within the code
+block.
+
+The sequence of values bound to variable is most commonly generated
+using the built-in function \textbf{range}, which returns a sequence
+containing an arithmetic progression. \textbf{The \texttt{range}
+function takes three integer arguments: \texttt{start,\ stop,} and
+\texttt{step}.} It produces the progression:
+\texttt{start,\ start\ +\ step,\ start\ +\ 2*step,} etc.\\
+\textbf{If \texttt{step} is positive, the last element is the largest
+integer(\texttt{start} + \texttt{i*step}) less than \texttt{stop}. If
+\texttt{step} is negative, the last element is the smallest integer
+greater than \texttt{stop}.}
+
+    \hypertarget{rangestart-stop-step}{%
+\subsection{\texorpdfstring{\texttt{range(start,\ stop,\ step)}}{range(start, stop, step)}}\label{rangestart-stop-step}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} range(5, 40, 10)
+\end{Verbatim}
+            
+    \emph{This doesn't output a list in Python 3, but I can confirm it does
+in Python 2.}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} [5, 15, 25, 35]
+\end{Verbatim}
+            
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#But I guess if you do it like this, using the list function to display the range, it displays the desired code from the book.}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} [40, 30, 20, 10]
+\end{Verbatim}
+            
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#In Python 3, range behaves the way xrange behaves in Python 2, so there's no need to worry about it.}
+\CommentTok{#I'm not really sure what this part about specifying a sequence using a literal is about though.}
+\end{Highlighting}
+\end{Shaded}
+
+    If the first argument is omitted, it defaults to 0, and if the last
+argument is omitted(the step size), it defaults to 1.
+\texttt{range(0,\ 3)} and \texttt{range(3)} both produce
+\texttt{{[}0,\ 1,\ 2{]}}. \textbf{In other words, \texttt{start}
+defaults to 0, and \texttt{step} defaults to 1.}
+
+Less commonly, we specify the sequence to be iterated over in a
+\texttt{for} loop by using a literal, e.g.(for example),
+\texttt{{[}0,\ 1,\ 2{]}}.
+
+    Think about the code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    x }\OperatorTok{=} \DecValTok{4}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, x):}
+        \BuiltInTok{print}\NormalTok{(i)}
+\NormalTok{        x }\OperatorTok{=} \DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+    Having \texttt{x\ =\ 5} inside the loop here \textbf{does not} affect
+the number of iterations. The \texttt{range} function in the line with
+\texttt{for} is evaluated just before the first iteration of the loop,
+and \textbf{not reevaluated for subsequent iterations}.
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{4}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+            \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+
+    \end{Verbatim}
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#This returns the same thing as if 'x = 5' was }
+\CommentTok{#not in the code, so it did not affect the }
+\CommentTok{#outcome at all.}
+\CommentTok{#An interesting thing to note here, is that the }
+\CommentTok{#variable 'i' is defined inside of the for loop}
+\CommentTok{#declaration.}
+\end{Highlighting}
+\end{Shaded}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+0
+1
+0
+1
+0
+1
+
+    \end{Verbatim}
+
+    This is the output to the above code because the \texttt{range} function
+in the outer loop is only evaluated once, but the \texttt{range}
+function in the inner loop is evaluated each time the inner \texttt{for}
+statement is reached.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#You can see this is true by how the output is grouped, it's like, [0,1,2,3], [0,1], [0,1], [0,1]. So basically, the }
+\CommentTok{#inner and outer loop both evaluate 4 times initially, but the inner loop, after the first outer loop, will evaluate }
+\CommentTok{#using the new x value, so two times instead of 4 times. It does this 3 times because of the outer loop.}
+\end{Highlighting}
+\end{Shaded}
+
+    The code below reimplements the exhaustive enumeration algorithm for
+finding cube roots that we did above. This time, it'll use a
+\texttt{for} loop and a \texttt{break} statement. When executed, a
+\texttt{break} statement exits the innermost loop in which it is
+enclosed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}Find the cube root of a perfect cube}
+         \PY{n}{x} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Enter an integer: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{ans} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{break}
+         \PY{k}{if} \PY{n}{ans}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{!=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is not a perfect cube}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{ans} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{ans}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cube root of}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter an integer: 343
+Cube root of 343 is 7
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{123456789}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{total}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+45
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{l+m+mi}{1}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{+}\PY{l+m+mi}{4}\PY{o}{+}\PY{l+m+mi}{5}\PY{o}{+}\PY{l+m+mi}{6}\PY{o}{+}\PY{l+m+mi}{7}\PY{o}{+}\PY{l+m+mi}{8}\PY{o}{+}\PY{l+m+mi}{9}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 45
+\end{Verbatim}
+            
+    As we can see above, the \texttt{for} statement can be used to
+conveniently iterate over characters of a string. Ths above code adds up
+all the numbers in the string
+\texttt{\textquotesingle{}123456789\textquotesingle{}} and prints the
+total.
+
+    \textbf{Finger exercise:} Let \texttt{s} be a string that contains a
+sequence of decimal numbers separated by commas, e.g.,
+\texttt{s\ =\ \textquotesingle{}1.23,2.4,3.123\textquotesingle{}}. Write
+a program that prints the sum of the numbers in \texttt{s}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{total}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1.23,2.4,3.123}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{for} \PY{n}{current\PYZus{}number} \PY{o+ow}{in} \PY{n}{s}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{current\PYZus{}number}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{total}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6.753
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}n = number}
+         \PY{c+c1}{\PYZsh{}l = list}
+         \PY{c+c1}{\PYZsh{}s = string}
+         \PY{c+c1}{\PYZsh{}f = float}
+         \PY{c+c1}{\PYZsh{}e = element}
+         \PY{n}{n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{How many numbers?: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{l} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{l}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter decimal number }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+         \PY{n}{s} \PY{o}{=} \PY{n}{s} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{e}\PY{p}{)} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{l}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+         \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{s}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+How many numbers?: 5
+Enter decimal number 1: 1
+Enter decimal number 2: 2
+Enter decimal number 3: 3
+Enter decimal number 4: 4
+Enter decimal number 5: 5
+[1.0, 2.0, 3.0, 4.0, 5.0]
+1.0 2.0 3.0 4.0 5.0
+15.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{l+m+mi}{5}\PY{o}{+}\PY{l+m+mi}{4}\PY{o}{+}\PY{l+m+mi}{3}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 15
+\end{Verbatim}
+            
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#We finally did it, ugh that was a pain for no reason. I really have to remember that my variables keep their values from previous code blocks, so I have to rename them or use new variable names...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{lecture-and-exercise-notesscratch-just-whatever-i-feel-like-putting-down}{%
+\section{Lecture and Exercise Notes/Scratch (just whatever I feel like
+putting
+down)}\label{lecture-and-exercise-notesscratch-just-whatever-i-feel-like-putting-down}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{hi} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello there}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{hi}
+         \PY{n}{foo} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{this isn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t right}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{foo}
+         \PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{name}
+         \PY{n}{greet} \PY{o}{=} \PY{n}{hi} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{name}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{greet}\PY{p}{)}
+         \PY{l+m+mi}{3}\PY{o}{*}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n+nb}{len}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{len}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hi there}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{name}
+         \PY{n}{name}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eric}\PY{l+s+s1}{\PYZsq{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello there, eric
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 'ric'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}coding demonstration from lectures, only last output}
+        \PY{c+c1}{\PYZsh{}displayed.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{abcd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 'ab'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{abcd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 'cd'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{str1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hello}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{str1}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} 'o'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{str4} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{helloworld}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{str4}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} 'helloworl'
+\end{Verbatim}
+            
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{x\PYZus{}str} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my fav num is}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{my fav num is }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{x\PYZus{}str} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{. }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{x\PYZus{}str}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+my fav num is 1 . x = 1
+my fav num is 1. x = 1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{text} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{type something }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+type something "foo"
+"foo""foo""foo""foo""foo"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} str
+\end{Verbatim}
+            
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# What gets read in is automatically a string, if you want to take in a number, you have to cast it as an int or float before you can actually use it.}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while}\PY{p}{(}\PY{n}{n} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{n} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}simple examples while and for loop for the same thing,}
+         \PY{c+c1}{\PYZsh{}showing for loop is easier to read.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{mysum} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mysum} \PY{o}{+}\PY{o}{=} \PY{n}{i}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mysum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+24
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{mysum} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mysum} \PY{o}{+}\PY{o}{=} \PY{n}{i}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mysum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+21
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{mysum} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{mysum} \PY{o}{+}\PY{o}{=} \PY{n}{i}
+             \PY{k}{if} \PY{n}{mysum} \PY{o}{==} \PY{l+m+mi}{5}\PY{p}{:}
+                 \PY{k}{break}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mysum}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Testing out break statement.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{}You can always rewrite a for loop using a while loop.}
+         \PY{c+c1}{\PYZsh{}However, you might not be able to rewrite a while loop}
+         \PY{c+c1}{\PYZsh{}using a for loop.}
+\end{Verbatim}
+
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{happy} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{k}{if} \PY{n}{happy} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hello world}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello world
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{c+c1}{\PYZsh{}Please remember to end your if statements }
+         \PY{c+c1}{\PYZsh{}and other statements with :}
+         \PY{c+c1}{\PYZsh{}I always forget.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{}vara varb exercise}
+         \PY{n}{varA} \PY{o}{=} \PY{l+m+mi}{32323}
+         \PY{n}{varB} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{varA}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str} \PY{o+ow}{or} \PY{n+nb}{type}\PY{p}{(}\PY{n}{varB}\PY{p}{)} \PY{o}{==} \PY{n+nb}{str}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{string involved}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{varA} \PY{o}{\PYZgt{}} \PY{n}{varB}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bigger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{varA} \PY{o}{==} \PY{n}{varB}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{equal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{varA} \PY{o}{\PYZlt{}} \PY{n}{varB}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{smaller}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+string involved
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}You can stop an infinite loop in your program by typing CTRL+c in the console.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{}You can purposely use an infinite loops like this:}
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}And then break out of it using \PYZdq{}break\PYZdq{}}
+             \PY{k}{break}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}This also works.}
+        \PY{k}{while} \PY{o+ow}{not} \PY{k+kc}{False}\PY{p}{:}
+            \PY{k}{break}
+\end{Verbatim}
+
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{num} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+             \PY{k}{if} \PY{n}{num} \PY{o}{\PYZlt{}} \PY{l+m+mi}{7}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Breaking out of loop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{break}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+             \PY{n}{num} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Outside of loop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10
+9
+8
+7
+Breaking out of loop
+Outside of loop
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}alright fine this program was a bit overdone}
+        \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{while}\PY{p}{(}\PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{print }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{elif} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{i} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prints }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{prints Goodbye!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+print  2
+prints  4
+prints  6
+prints  8
+prints  10
+prints Goodbye!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Yeah woops I guess I took it too literally}
+        \PY{c+c1}{\PYZsh{}This is correct.}
+        \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+            \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Goodbye!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+4
+6
+8
+10
+Goodbye!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello!
+10
+8
+6
+4
+2
+
+    \end{Verbatim}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}Well, I thought this wouldn\PYZsq{}t be accepted.}
+         \PY{c+c1}{\PYZsh{}Can\PYZsq{}t use a for loop or range.}
+         \PY{c+c1}{\PYZsh{}I could reuse this for the for loop part though!}
+         \PY{n}{end} \PY{o}{=} \PY{l+m+mi}{250}
+         \PY{n}{summation} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{end} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{summation} \PY{o}{+}\PY{o}{=} \PY{n}{i}
+             \PY{c+c1}{\PYZsh{}print(i)}
+             \PY{c+c1}{\PYZsh{}print(summation)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{summation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+31375
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{end} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{summation} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n}{end}\PY{p}{:}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{summation} \PY{o}{+}\PY{o}{=} \PY{n}{i}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{summation}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+21
+
+    \end{Verbatim}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Goodbye!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+4
+6
+8
+10
+Goodbye!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Hello!
+10
+8
+6
+4
+2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{ans} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{itersLeft} \PY{o}{=} \PY{n}{x}
+        \PY{k}{while}\PY{p}{(}\PY{n}{itersLeft} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ans} \PY{o}{=} \PY{n}{ans} \PY{o}{+} \PY{n}{x}
+            \PY{n}{itersLeft} \PY{o}{=} \PY{n}{itersLeft} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{ans}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5*5 = 25
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}don\PYZsq{}t be fooled here, num is redfined}
+        \PY{c+c1}{\PYZsh{}in the for loop.}
+        \PY{n}{num} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+1
+2
+3
+4
+4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}division always gives a float}
+        \PY{c+c1}{\PYZsh{}for some reason dividing 0 by a number gives 0}
+        \PY{c+c1}{\PYZsh{}maybe im just dumb}
+        \PY{n}{divisor} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{num}\PY{o}{/}\PY{n}{divisor}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0
+1.0
+2.0
+3.0
+4.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{variable} \PY{o}{\PYZpc{}} \PY{l+m+mi}{4} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{variable}\PY{p}{)}
+            \PY{k}{if} \PY{n}{variable} \PY{o}{\PYZpc{}} \PY{l+m+mi}{16} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Foo!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0
+Foo!
+4
+8
+12
+16
+Foo!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} o never prints out because it\PYZsq{}s a vowel and gets parsed in the first if statement.}
+         \PY{c+c1}{\PYZsh{} I missed the dumb spaces for the value of numCons, I had \PYZhy{}22 but there are 3 spaces so it\PYZsq{}s \PYZhy{}25.}
+         \PY{n}{school} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Massachusetts Institute of Technology}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{numVowels} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{numCons} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{cons} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{char} \PY{o+ow}{in} \PY{n}{school}\PY{p}{:}
+             \PY{k}{if} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}} \PYZbs{}
+                \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n}{numVowels} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{elif} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{char}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{cons}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{char}\PY{p}{)}
+                 \PY{n}{numCons} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{numVowels is: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{numVowels}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{numCons is: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{numCons}\PY{p}{)}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cons}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+M
+numVowels is: 11
+numCons is: -25
+['s', 's', 'c', 'h', 's', 't', 't', 's', ' ', 'I', 'n', 's', 't', 't', 't', ' ', 'f', ' ', 'T', 'c', 'h', 'n', 'l', 'g', 'y']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Make sure to always define/initialize the variable before the loop, when using loops.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Cleaner Guess and Check}
+         \PY{c+c1}{\PYZsh{} cube root}
+         \PY{n}{cube} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter an Integer: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{guess} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{cube}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{guess}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{==} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{cube}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{break}
+         \PY{k}{if} \PY{n}{guess}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{!=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{cube}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{cube}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{is not a perfect cube.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{if} \PY{n}{cube} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{guess} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{guess}
+                 
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cube root of }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cube}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{guess}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Enter an Integer: -28
+-28 is not a perfect cube.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}You shouldn\PYZsq{}t just deal with cases where you get what you expect. You should prepare for other cases to see if your code does the right thing.\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} "You shouldn't just deal with cases where you get what you expect. You should prepare for other cases to see if your code does the right thing."
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}PSET 1 Problem 1}
+         \PY{n}{s} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{azcbobobegghakl}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{numVowels} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{char} \PY{o+ow}{in} \PY{n}{s}\PY{p}{:}
+             \PY{k}{if} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{char} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{u}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n}{numVowels} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of vowels: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{numVowels}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of vowels: 5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{c+c1}{\PYZsh{}PSET 1 Problem 2}
+         \PY{n}{s} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bobobobobobo}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{numBob} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{testBob} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+         \PY{k}{for} \PY{n}{char} \PY{o+ow}{in} \PY{n}{s}\PY{p}{:}
+             \PY{n}{testBob} \PY{o}{+}\PY{o}{=} \PY{n}{char}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{testBob}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{testBob} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                     \PY{n}{numBob} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{testBob}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{n}{testBob} \PY{o}{=} \PY{n}{testBob}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of times bob occurs is: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{numBob}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of times bob occurs is: 5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{c+c1}{\PYZsh{}PSET 1 Problem 3}
+          \PY{c+c1}{\PYZsh{}This was actually so hard. Easy once I figured out that comparison operands(\PYZgt{}, \PYZlt{}, etc) work for strings. (a \PYZlt{} b == True etc)}
+          \PY{n}{s} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abcbcd}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{alphabet} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abcdefghijklmnopqrstuvwxyz}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{largestString} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{while} \PY{n}{i} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{:}
+              \PY{n}{subString} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+              \PY{n}{test} \PY{o}{=} \PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{p}{]}
+              \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+              \PY{k}{for} \PY{n}{char} \PY{o+ow}{in} \PY{n}{test}\PY{p}{:}
+                  \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{subString}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{subString} \PY{o}{+}\PY{o}{=} \PY{n}{char}
+                  \PY{k}{elif} \PY{n}{char} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{subString}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{subString} \PY{o}{+}\PY{o}{=} \PY{n}{char}
+                  \PY{k}{elif} \PY{n}{char} \PY{o}{\PYZlt{}} \PY{n}{subString}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:}
+                      \PY{k}{break}
+                  \PY{c+c1}{\PYZsh{}print(subString)}
+              \PY{c+c1}{\PYZsh{}if subString \PYZgt{} largestString, then if lengths are tied, largestString doesn\PYZsq{}t get replaced.}
+              \PY{c+c1}{\PYZsh{}if subString \PYZgt{}= largestString, then if lengths are tied, largestString does get replaced.}
+              \PY{c+c1}{\PYZsh{}we want to print the first substring in ties so we don\PYZsq{}t want it to get replaced.}
+              \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{subString}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{largestString}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{largestString} \PY{o}{=} \PY{n}{subString}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Longest substring in alphabetical order is: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{largestString}\PY{p}{)}
+                  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Longest substring in alphabetical order is: beggh
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}190}]:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZgt{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}190}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}191}]:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZgt{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}191}]:} True
+\end{Verbatim}
+            
+    \begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{'''what do we want our program to do...  }
+\CommentTok{Perhaps we could use a while loop?  }
+\CommentTok{Let's think about the outcome.  }
+\CommentTok{'azcbobobegghakl' is the example string.  }
+\CommentTok{We'd go through this string and compare it to alphabetical order and collect the following substrings:  }
+\CommentTok{'az' 'z' 'c' 'bo' 'o' 'bo' 'o' 'beggh' 'eggh' 'ggh' 'gh' 'h' 'akl' 'kl' 'l'}
+\CommentTok{Then return 'beggh' because it is the largest.}
+\CommentTok{Second example string: 'abcbcd'}
+\CommentTok{'abc' 'bc' 'c' 'bcd' 'cd' 'd'}
+\CommentTok{'abc' and 'bcd' are tied, but 'abc' is first so that is what is printed.}
+\CommentTok{Whenever the next element of the string is "less" than the other, we want it to terminate. We don't even need to look at the alphabet.'''}
+\end{Highlighting}
+\end{Shaded}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
